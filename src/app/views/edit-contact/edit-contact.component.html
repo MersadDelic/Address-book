@@ -1,0 +1,41 @@
+<h1 *ngIf="isAddMode">Add User Form</h1>
+<h1 *ngIf="!isAddMode">Edit User Form</h1>
+<mat-spinner *ngIf="isLoading" style="margin:0 auto;"></mat-spinner>
+<div class="container">
+    <form [formGroup]="formGroup" (ngSubmit)=" formGroup.valid && onSubmit()" class="form" novalidate>
+        <mat-form-field appearance="fill" class="form-element">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName">
+            <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-element">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName">
+            <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-element">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="emailAddress">
+            <mat-error *ngIf="formGroup.controls['emailAddress'].errors?.pattern">Invalid email address</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <textarea matInput cdkTextareaAutosize formControlName="address"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input matInput formControlName="phoneNumber">
+            <mat-error *ngIf="formGroup.controls['phoneNumber'].errors?.pattern">Invalid phone number</mat-error>
+        </mat-form-field>
+
+        <div class="form-element">
+            <button mat-raised-button color="primary" type="submit" class="button">SAVE
+            </button>
+            <button type="button" routerLink="/" mat-raised-button>CANCEL</button>
+        </div>
+    </form>
+</div>
